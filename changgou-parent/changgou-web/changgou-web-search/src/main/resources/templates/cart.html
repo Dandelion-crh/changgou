@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
+	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+	<title>我的购物车</title>
+	<link rel="icon" href="./img/favicon.ico">
+
+	<!-- 引入样式 -->
+	<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+	<link rel="stylesheet" type="text/css" href="./css/all.css" />
+	<link rel="stylesheet" type="text/css" href="./css/pages-cart.css" />
+</head>
+
+<body>
+	<!--head-->
+	<!-- 头部栏位 -->
+	<!--页面顶部-->
+	<div id="nav-bottom" class="headerpage"></div>
+
+
+	<div class="cart py-container">
+		<!--All goods-->
+		<div class="allgoods">
+			<h4>全部商品
+				<span></span>
+			</h4>
+			<div class="cart-main">
+				<div class="yui3-g cart-th">
+					<div class="yui3-u-1-4">
+						<input class="chooseAll" type="checkbox" name="" id="" value="" /> 全部</div>
+					<div class="yui3-u-1-4">商品</div>
+					<div class="yui3-u-1-8">单价（元）</div>
+					<div class="yui3-u-1-8">数量</div>
+					<div class="yui3-u-1-8">小计（元）</div>
+					<div class="yui3-u-1-8">操作</div>
+				</div>
+				<div class="cart-item-list" id="app">
+					<div class="cart-body">
+						<!-- vue loadlist -->
+						<div class="cart-list" v-for="item in dataList" :key="item.index">
+							<ul class="goods-list yui3-g">
+								<li class="yui3-u-1-24">
+									<input type="checkbox" name="chk_list" name="" id="" value="" @click="choose(item.skuId)"/>
+								</li>
+								<li class="yui3-u-6-24">
+									<div class="good-item">
+										<div class="item-img">
+											<img :src="item.image" />
+										</div>
+									</div>
+								</li>
+								<li class="yui3-u-5-24">
+									<div class="item-txt">{{item.name}}</div>
+								</li>
+								<li class="yui3-u-1-8">
+									<span class="price">{{item.price}}</span>
+								</li>
+								<li class="yui3-u-1-8">
+									<a href="javascript:void(0)" @click="addNum(item.skuId,item.num-1)" class="increment mins">-</a>
+									<input autocomplete="off" type="text" v-model="item.num" readonly="readonly" value="1" minnum="1" class="itxt" />
+									<a href="javascript:void(0)" @click="addNum(item.skuId,item.num+1)" class="increment plus">+</a>
+								</li>
+								<li class="yui3-u-1-8">
+									<span class="sum">{{item.money}}</span>
+								</li>
+								<li class="yui3-u-1-8">
+									<a href="javascript:void(0)" @click="addNum(item.skuId,-item.num)">删除</a>
+									<br />
+									<a href="#none">移到收藏</a>
+								</li>
+							</ul>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<div class="cart-tool">
+				<div class="select-all">
+					<input class="chooseAll" type="checkbox" name="" id="" value="" />
+					<span>全选</span>
+				</div>
+				<div class="option">
+					<a href="#none">删除选中的商品</a>
+					<a href="#none">移到我的关注</a>
+					<a href="#none">清除下柜商品</a>
+				</div>
+				<div class="money-box">
+					<div class="sumbtn">
+						<a class="sum-btn" href="javascript:jump()">结算</a>
+					</div>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+			<div class="liked">
+				<ul class="sui-nav nav-tabs">
+					<li class="active">
+						<a href="#index" data-toggle="tab">猜你喜欢</a>
+					</li>
+					<li>
+						<a href="#profile" data-toggle="tab">特惠换购</a>
+					</li>
+				</ul>
+				<div class="clearfix"></div>
+				<div class="tab-content">
+					<div id="index" class="tab-pane active">
+						<div id="myCarousel" data-ride="carousel" data-interval="4000" class="sui-carousel slide">
+							<div class="carousel-inner">
+								<div class="active item">
+									<ul>
+										<li>
+											<img src="./img/like1.png" />
+											<div class="intro">
+												<i>Apple苹果iPhone 6s (A1699)</i>
+											</div>
+											<div class="money">
+												<span>$29.00</span>
+											</div>
+											<div class="incar">
+												<a href="#" class="sui-btn btn-bordered btn-xlarge btn-default">
+													<i class="car"></i>
+													<span class="cartxt">加入购物车</span>
+												</a>
+											</div>
+										</li>
+										<li>
+											<img src="./img/like2.png" />
+											<div class="intro">
+												<i>Apple苹果iPhone 6s (A1699)</i>
+											</div>
+											<div class="money">
+												<span>$29.00</span>
+											</div>
+											<div class="incar">
+												<a href="#" class="sui-btn btn-bordered btn-xlarge btn-default">
+													<i class="car"></i>
+													<span class="cartxt">加入购物车</span>
+												</a>
+											</div>
+										</li>
+										<li>
+											<img src="./img/like3.png" />
+											<div class="intro">
+												<i>Apple苹果iPhone 6s (A1699)</i>
+											</div>
+											<div class="money">
+												<span>$29.00</span>
+											</div>
+											<div class="incar">
+												<a href="#" class="sui-btn btn-bordered btn-xlarge btn-default">
+													<i class="car"></i>
+													<span class="cartxt">加入购物车</span>
+												</a>
+											</div>
+										</li>
+										<li>
+											<img src="./img/like4.png" />
+											<div class="intro">
+												<i>Apple苹果iPhone 6s (A1699)</i>
+											</div>
+											<div class="money">
+												<span>$29.00</span>
+											</div>
+											<div class="incar">
+												<a href="#" class="sui-btn btn-bordered btn-xlarge btn-default">
+													<i class="car"></i>
+													<span class="cartxt">加入购物车</span>
+												</a>
+											</div>
+										</li>
+									</ul>
+								</div>
+								<div class="item">
+									<ul>
+										<li>
+											<img src="./img/like1.png" />
+											<div class="intro">
+												<i>Apple苹果iPhone 6s (A1699)</i>
+											</div>
+											<div class="money">
+												<span>$29.00</span>
+											</div>
+											<div class="incar">
+												<a href="#" class="sui-btn btn-bordered btn-xlarge btn-default">
+													<i class="car"></i>
+													<span class="cartxt">加入购物车</span>
+												</a>
+											</div>
+										</li>
+										<li>
+											<img src="./img/like2.png" />
+											<div class="intro">
+												<i>Apple苹果iPhone 6s (A1699)</i>
+											</div>
+											<div class="money">
+												<span>$29.00</span>
+											</div>
+											<div class="incar">
+												<a href="#" class="sui-btn btn-bordered btn-xlarge btn-default">
+													<i class="car"></i>
+													<span class="cartxt">加入购物车</span>
+												</a>
+											</div>
+										</li>
+										<li>
+											<img src="./img/like3.png" />
+											<div class="intro">
+												<i>Apple苹果iPhone 6s (A1699)</i>
+											</div>
+											<div class="money">
+												<span>$29.00</span>
+											</div>
+											<div class="incar">
+												<a href="#" class="sui-btn btn-bordered btn-xlarge btn-default">
+													<i class="car"></i>
+													<span class="cartxt">加入购物车</span>
+												</a>
+											</div>
+										</li>
+										<li>
+											<img src="./img/like4.png" />
+											<div class="intro">
+												<i>Apple苹果iPhone 6s (A1699)</i>
+											</div>
+											<div class="money">
+												<span>$29.00</span>
+											</div>
+											<div class="incar">
+												<a href="#" class="sui-btn btn-bordered btn-xlarge btn-default">
+													<i class="car"></i>
+													<span class="cartxt">加入购物车</span>
+												</a>
+											</div>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<a href="#myCarousel" data-slide="prev" class="carousel-control left">‹</a>
+							<a href="#myCarousel" data-slide="next" class="carousel-control right">›</a>
+						</div>
+					</div>
+					<div id="profile" class="tab-pane">
+						<p>特惠选购</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 底部栏位 -->
+	<!--页面底部-->
+	<div class="clearfix footer">
+		
+	</div>
+	<!--页面底部END-->
+	<script type="text/javascript" src="./js/plugins/jquery/jquery.min.js"></script>
+	<!-- 引入组件库 -->
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.8/dist/vue.js"></script>
+	<script src="https://cdn.bootcss.com/element-ui/2.5.4/index.js"></script>
+	<script src="js/axios.js"></script>
+
+	<script type="text/javascript">
+		$(".chooseAll").click(function () {
+			$("input[name='chk_list']").prop("checked", $(this).prop("checked"));
+		})
+		$(".headerpage").load("components/header.html");
+		$(".footer").load("components/footer.html")
+	</script>
+	<script>
+		/*****
+		 * 定义一个Areas控制层 controller
+		 * 发送HTTP请求和后台进行数据交互
+		 ****/
+		var app=new Vue({
+			el:'#app',
+			data:{
+				dataList:[],
+				chooseItem:[]
+			},
+			methods:{
+				//搜索方法
+				searchList:function () {
+					var arr,reg=new RegExp("(^| )cuname=([^;]*)(;|$)");
+					if(arr=document.cookie.match(reg)){
+						axios.get('http://order-changgou-java.itheima.net/api/cart/list').then(function (response) {
+							//获取数据
+							app.dataList=response.data.data;
+						});
+					}else{
+						location.href='http://login-changgou-java.itheima.net/login.html?FROM='+window.location.href;
+					}
+				},
+				addNum:function(id,num){
+					//添加购物车数据
+					axios.get('http://order-changgou-java.itheima.net/api/cart/add?id='+id+'&num='+num).then(function(response){
+						//if(resonse.data.flag){
+							//添加成功,刷新列表
+							app.searchList();
+						//}
+					});
+				},
+				choose:function(id){
+					let flag = false;
+					if(this.chooseItem.length > 0){
+						let a =[];
+						for (let i = 0; i < this.chooseItem.length; i++) {
+							if(this.chooseItem[i] != id){
+								a.push(this.chooseItem[i]);
+							}else{
+								flag = true;
+							}
+						}
+						this.chooseItem = a;
+					}
+					if(!flag){
+						this.chooseItem.push(id);
+					}
+				}
+
+			},
+			created:function () {
+				this.searchList();
+			}
+		});
+		function jump(){
+			if(app.chooseItem.length <=0 ){
+				let ids = '';
+				for(let i=0;i<app.dataList.length;i++){
+					ids = ids + app.dataList[i].skuId + ',';
+				}
+				ids = ids.substring(0, ids.length -1);
+				location.href='order.html?ids=' + ids;
+			}else{
+				location.href='order.html?ids=' + app.chooseItem;
+			}
+		}
+	</script>
+
+</body>
+
+</html>

@@ -1,0 +1,22 @@
+server:
+  port: 18185
+spring:
+  application:
+    name: collect
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.211.132:3306/changgou_collect?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: 123456
+  # 允许bean被覆盖
+  main:
+    allow-bean-definition-overriding: true
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:7001/eureka
+  instance:
+    prefer-ip-address: true
+#超时配置  Feign请求读取数据超时时间
+ribbon:
+  ReadTimeout: 300000

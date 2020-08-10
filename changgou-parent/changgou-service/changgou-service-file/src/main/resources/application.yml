@@ -1,0 +1,15 @@
+spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB #上传文件的最大的限制
+      max-request-size: 10MB #请求request的大小不能超过10M
+  application:
+    name: file
+server:
+  port: 18082
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:7001/eureka
+  instance:
+    prefer-ip-address: true
