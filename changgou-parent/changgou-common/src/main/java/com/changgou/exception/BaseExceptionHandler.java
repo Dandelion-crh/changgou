@@ -4,7 +4,6 @@ import com.changgou.util.Result;
 import com.changgou.util.StatusCode;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @ControllerAdvice//开启spring的公共异常处理
